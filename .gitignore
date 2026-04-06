@@ -1,0 +1,11 @@
+# Root .gitignore
+.DS_Store
+.vscode/
+.idea/
+*.log
+node_modules/
+build/
+dist/
+
+# Don't ignore .gitignore files in subdirectories
+!**/.gitignore
