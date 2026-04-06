@@ -16,16 +16,21 @@ mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('✅ Connected to MongoDB Atlas'))
   .catch(err => console.error('❌ MongoDB connection error:', err));
 
-// Routes
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/quizzes', require('./routes/quizzes'));
-app.use('/api/attempts', require('./routes/attempts'));
-app.use('/api/performance', require('./routes/performance'));
+// Root endpoint
+app.get('/', (req, res) => {
+  res.json({ message: 'AI Quiz Student API', version: '1.0.0' });
+});
 
 // Health check
 app.get('/health', (req, res) => {
   res.json({ status: 'Server is running' });
 });
+
+// Routes
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/quizzes', require('./routes/quizzes'));
+app.use('/api/attempts', require('./routes/attempts'));
+app.use('/api/performance', require('./routes/performance'));
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
